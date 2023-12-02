@@ -1,0 +1,111 @@
+import { describe, expect, test } from 'bun:test'
+import fs from 'fs'
+import path from 'path'
+import {
+  getNumberOfCubes,
+  getPowerOfRound,
+  isGameValid,
+  parseGames,
+} from './utils'
+
+const inputs = fs.readFileSync(
+  path.resolve(import.meta.dir, 'input.txt'),
+  'utf8'
+)
+
+const input = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
+Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
+Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
+
+describe('day 002', () => {
+  test('It should split the games into correct format', () => {
+    const games = parseGames(input)
+    expect(games.length).toBe(5)
+
+    for (let i = 1; i <= 5; i++) {
+      expect(games[i - 1].id).toBe(i)
+    }
+
+    expect(games[0].rounds.length).toBe(3)
+    expect(games[1].rounds.length).toBe(3)
+    expect(games[2].rounds.length).toBe(3)
+    expect(games[3].rounds.length).toBe(3)
+    expect(games[4].rounds.length).toBe(2)
+  })
+
+  test('It determine if a game is valid', () => {
+    const games = parseGames(input)
+    expect(isGameValid(games[0])).toBe(true)
+    expect(isGameValid(games[1])).toBe(true)
+    expect(isGameValid(games[2])).toBe(false)
+    expect(isGameValid(games[3])).toBe(false)
+    expect(isGameValid(games[4])).toBe(true)
+  })
+
+  test('It should determine the fewest number of cubes necessary', () => {
+    const games = parseGames(input)
+
+    expect(getNumberOfCubes(games[0])).toMatchObject({
+      red: 4,
+      green: 2,
+      blue: 6,
+    })
+
+    expect(getNumberOfCubes(games[1])).toMatchObject({
+      red: 1,
+      green: 3,
+      blue: 4,
+    })
+
+    expect(getNumberOfCubes(games[2])).toMatchObject({
+      red: 20,
+      green: 13,
+      blue: 6,
+    })
+
+    expect(getNumberOfCubes(games[3])).toMatchObject({
+      red: 14,
+      green: 3,
+      blue: 15,
+    })
+
+    expect(getNumberOfCubes(games[4])).toMatchObject({
+      red: 6,
+      green: 3,
+      blue: 2,
+    })
+  })
+
+  test('It should calculate the right power of a cube combination', () => {
+    const games = parseGames(input)
+
+    expect(getPowerOfRound(getNumberOfCubes(games[0]))).toBe(48)
+    expect(getPowerOfRound(getNumberOfCubes(games[1]))).toBe(12)
+    expect(getPowerOfRound(getNumberOfCubes(games[2]))).toBe(1560)
+    expect(getPowerOfRound(getNumberOfCubes(games[3]))).toBe(630)
+    expect(getPowerOfRound(getNumberOfCubes(games[4]))).toBe(36)
+  })
+
+  test('Part 1 should give the right score', () => {
+    const games = parseGames(inputs)
+
+    const validGamesIds = games
+      .map((game) => {
+        const isValid = isGameValid(game)
+
+        return isValid ? game.id : null
+      })
+      .filter(Boolean)
+
+    expect(validGamesIds.reduce((acc, curr) => acc + curr, 0)).toBe(2512)
+  })
+
+  test('Part 2 should give the right score', () => {
+    const games = parseGames(inputs)
+    const powerValues = games.map(getNumberOfCubes).map(getPowerOfRound)
+
+    expect(powerValues.reduce((acc, curr) => acc + curr, 0)).toBe(67335)
+  })
+})

@@ -13,5 +13,13 @@ const values_002 = inputs.map(decryptNumberWords).map(decryptCalibrationValue)
 
 const sum_002 = values_002.reduce((acc, curr) => acc + curr, 0)
 
-console.info('[PART 001]', 'Summarization of calibration values', sum_001)
-console.info('[PART 002]', 'Summarization of calibration values', sum_002)
+console.info(
+  '[DAY 001 // PART 001]',
+  'Summarization of calibration values',
+  sum_001
+)
+console.info(
+  '[DAY 001 // PART 002]',
+  'Summarization of calibration values',
+  sum_002
+)
