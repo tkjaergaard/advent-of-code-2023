@@ -14,6 +14,12 @@ All of the examples for each day has written test case in the respective `index.
 
 When the day is solved, a test for the correct result is added.
 
+To run the tests:
+
+```bash
+$ bun test
+```
+
 ## Notes
 
 Below are my notes on how it went for the individual days. It's honest and initial thoughts.
