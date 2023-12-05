@@ -1,6 +1,4 @@
-export const parseGames = (input: string): Game[] => {
-  const games = input.split('\n')
-
+export const parseGames = (games: string[]): Game[] => {
   return games.map((game) => {
     const [id, rounds] = game.split(':')
 

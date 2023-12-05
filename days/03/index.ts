@@ -1,13 +1,7 @@
-import fs from 'fs'
-import path from 'path'
 import { findGears, getPartNumbers } from './utils'
+import { getInput } from 'helpers/index'
 
-const inputs = fs.readFileSync(
-  path.resolve(import.meta.dir, 'input.txt'),
-  'utf8'
-)
-
-const lines = inputs.split('\n')
+const lines = getInput(import.meta.dir)
 
 console.info(
   '[DAY 003 // PART 001]',

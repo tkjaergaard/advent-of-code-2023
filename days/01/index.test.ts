@@ -1,11 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import { decryptCalibrationValue, decryptNumberWords } from './utils'
-import fs from 'fs'
-import path from 'path'
+import { getInput } from 'helpers/index'
 
-const inputs = fs
-  .readFileSync(path.resolve(import.meta.dir, 'input.txt'), 'utf8')
-  .split('\n')
+const inputs = getInput(import.meta.dir)
 
 describe('Advent of Code 2023', () => {
   test('It should find the calibration value', () => {

@@ -1,24 +1,9 @@
 import { describe, test, expect } from 'bun:test'
 import { findGears, getPartNumbers } from './utils'
-import fs from 'fs'
-import path from 'path'
-const inputs = fs.readFileSync(
-  path.resolve(import.meta.dir, 'input.txt'),
-  'utf8'
-)
+import { getInput } from 'helpers/index'
 
-const lines = inputs.split('\n')
-
-const exampleInput = `467..114..
-...*......
-..35..633.
-......#...
-617*......
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598..`.split('\n')
+const lines = getInput(import.meta.dir)
+const exampleInput = getInput(import.meta.dir, 'example.txt')
 
 describe('Day 03', () => {
   test('It should find the right part numbers', () => {

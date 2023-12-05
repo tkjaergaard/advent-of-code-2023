@@ -1,3 +1,5 @@
+import { isDigit } from 'helpers/index'
+
 export const isSymbol = (input: string) => {
   return input != '.'
 }
@@ -173,8 +175,4 @@ const findFloting = (line: string, index: number) => {
   }
 
   return isOneDigit ? [a + b] : [a, b]
-}
-
-const isDigit = (value: string) => {
-  return /^\d+$/.test(value)
 }

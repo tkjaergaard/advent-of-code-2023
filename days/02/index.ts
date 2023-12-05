@@ -1,16 +1,12 @@
-import fs from 'fs'
-import path from 'path'
 import {
   getNumberOfCubes,
   getPowerOfRound,
   isGameValid,
   parseGames,
 } from './utils'
+import { getInput } from 'helpers/index'
 
-const inputs = fs.readFileSync(
-  path.resolve(import.meta.dir, 'input.txt'),
-  'utf8'
-)
+const inputs = getInput(import.meta.dir)
 
 const games = parseGames(inputs)
 

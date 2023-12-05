@@ -1,10 +1,7 @@
-import fs from 'fs'
-import path from 'path'
 import { decryptNumberWords, decryptCalibrationValue } from './utils'
+import { getInput } from 'helpers/index'
 
-const inputs = fs
-  .readFileSync(path.resolve(import.meta.dir, 'input.txt'), 'utf8')
-  .split('\n')
+const inputs = getInput(import.meta.dir)
 
 const values_001 = inputs.map(decryptCalibrationValue)
 const sum_001 = values_001.reduce((acc, curr) => acc + curr, 0)
