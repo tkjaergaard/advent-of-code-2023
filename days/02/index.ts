@@ -4,10 +4,9 @@ import {
   isGameValid,
   parseGames,
 } from './utils'
-import { getInput } from 'helpers/index'
+import { getInput, sum } from 'helpers/index'
 
 const inputs = getInput(import.meta.dir)
-
 const games = parseGames(inputs)
 
 const validGamesIds = games
@@ -23,11 +22,11 @@ const powerValues = games.map(getNumberOfCubes).map(getPowerOfRound)
 console.info(
   '[DAY 002 // PART 001]',
   'Summarization of valid games',
-  validGamesIds.reduce((acc, curr) => acc + curr, 0)
+  sum(validGamesIds)
 )
 
 console.info(
   '[DAY 002 // PART 002]',
   'Summarization of power values',
-  powerValues.reduce((acc, curr) => acc + curr, 0)
+  sum(powerValues)
 )

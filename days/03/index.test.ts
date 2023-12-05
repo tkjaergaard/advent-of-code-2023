@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'bun:test'
 import { findGears, getPartNumbers } from './utils'
-import { getInput } from 'helpers/index'
+import { getInput, sum } from 'helpers/index'
 
 const lines = getInput(import.meta.dir)
 const exampleInput = getInput(import.meta.dir, 'example.txt')
@@ -11,8 +11,8 @@ describe('Day 03', () => {
     const results2 = getPartNumbers(lines)
 
     expect(result).toEqual([467, 35, 633, 617, 592, 755, 664, 598])
-    expect(result.reduce((a, b) => a + b)).toBe(4361)
-    expect(results2.reduce((a, b) => a + b)).toBe(528799)
+    expect(sum(result)).toBe(4361)
+    expect(sum(results2)).toBe(528799)
   })
 
   test('It should find the right gears', () => {
@@ -20,6 +20,6 @@ describe('Day 03', () => {
     const result2 = findGears(lines)
 
     expect(result).toEqual([16345, 451490])
-    expect(result2.reduce((a, b) => a + b, 0)).toEqual(84907174)
+    expect(sum(result2)).toEqual(84907174)
   })
 })

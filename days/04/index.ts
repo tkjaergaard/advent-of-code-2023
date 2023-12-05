@@ -1,5 +1,5 @@
 import { getTotalNumberOfCards, parseCards } from './utils'
-import { getInput } from 'helpers/index'
+import { getInput, sum } from 'helpers/index'
 
 const inputs = getInput(import.meta.dir)
 const cards = parseCards(inputs)
@@ -7,7 +7,7 @@ const cards = parseCards(inputs)
 console.info(
   '[DAY 004 // PART 001]',
   'Total stratchcard points',
-  cards.map((card) => card.points).reduce((a, b) => a + b, 0)
+  sum(cards.map((card) => card.points))
 )
 
 console.info(

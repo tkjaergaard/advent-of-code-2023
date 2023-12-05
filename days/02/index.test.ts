@@ -5,7 +5,7 @@ import {
   isGameValid,
   parseGames,
 } from './utils'
-import { getInput } from 'helpers/index'
+import { getInput, sum } from 'helpers/index'
 
 const inputs = getInput(import.meta.dir)
 const exampleInput = getInput(import.meta.dir, 'example.txt')
@@ -90,13 +90,13 @@ describe('day 002', () => {
       })
       .filter(Boolean)
 
-    expect(validGamesIds.reduce((acc, curr) => acc + curr, 0)).toBe(2512)
+    expect(sum(validGamesIds)).toBe(2512)
   })
 
   test('Part 2 should give the right score', () => {
     const games = parseGames(inputs)
     const powerValues = games.map(getNumberOfCubes).map(getPowerOfRound)
 
-    expect(powerValues.reduce((acc, curr) => acc + curr, 0)).toBe(67335)
+    expect(sum(powerValues)).toBe(67335)
   })
 })

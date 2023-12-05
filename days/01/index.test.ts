@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { decryptCalibrationValue, decryptNumberWords } from './utils'
-import { getInput } from 'helpers/index'
+import { getInput, sum } from 'helpers/index'
 
 const inputs = getInput(import.meta.dir)
 
@@ -29,9 +29,8 @@ describe('Advent of Code 2023', () => {
 
   test('The sum of part 1', () => {
     const claibrationValues = inputs.map(decryptCalibrationValue)
-    const sum = claibrationValues.reduce((acc, curr) => acc + curr, 0)
 
-    expect(sum).toBe(54338)
+    expect(sum(claibrationValues)).toBe(54338)
   })
 
   test('The sum of part 2', () => {
@@ -39,8 +38,6 @@ describe('Advent of Code 2023', () => {
       .map(decryptNumberWords)
       .map(decryptCalibrationValue)
 
-    const sum = claibrationValues.reduce((acc, curr) => acc + curr, 0)
-
-    expect(sum).toBe(53389)
+    expect(sum(claibrationValues)).toBe(53389)
   })
 })
