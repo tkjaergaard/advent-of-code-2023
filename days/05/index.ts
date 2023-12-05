@@ -1,6 +1,20 @@
-import { getInput } from 'helpers/index'
+import { chunk, getRawInput } from 'helpers/index'
+import { parseInput, findLowestLocation } from './utils'
 
-console.log(getInput(import.meta.dir))
+const entries = getRawInput(import.meta.dir).split(/^\n/gim)
 
-console.info('[DAY 005 // PART 001]', 'Total stratchcard points')
-console.info('[DAY 005 // PART 002]', 'Total scratchcards')
+const { seeds, almanacs } = parseInput(entries)
+
+const blocks = Object.values(almanacs)
+const part1 = findLowestLocation(
+  seeds.map((seed) => [seed, seed + 1]),
+  blocks
+)
+
+const part2 = findLowestLocation(
+  chunk(seeds, 2).map(([seed, range]) => [seed, seed + range]),
+  blocks
+)
+
+console.info('[DAY 005 // PART 001]', 'Lowest location number', part1)
+console.info('[DAY 005 // PART 002]', 'Lowest location number', part2)
