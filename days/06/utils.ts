@@ -17,9 +17,7 @@ export const toEntries = (lines: string[]) => {
 }
 
 export const calculateAnswer = (entries: number[][]) => {
-  const ranges: number[][] = []
-
-  let answer: number[] = []
+  let answer: number = 1
 
   for (const entry of entries) {
     const distance = entry[1]
@@ -27,9 +25,8 @@ export const calculateAnswer = (entries: number[][]) => {
 
     let speeds: number = 0
 
-    for (let i = 1; i <= time; i++) {
-      let speed = i
-      let timeToTravel = time - i
+    for (let speed = 1; speed <= time; speed++) {
+      let timeToTravel = time - speed
       let potentialDistance = speed * timeToTravel
 
       if (potentialDistance > distance) {
@@ -37,10 +34,10 @@ export const calculateAnswer = (entries: number[][]) => {
       }
     }
 
-    answer.push(speeds)
+    answer *= speeds
   }
 
-  return answer.reduce((a, b) => a * b, 1)
+  return answer
 }
 
 export const turnIntoOneRace = (entries: number[][]) => {
