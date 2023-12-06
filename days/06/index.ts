@@ -1,7 +1,7 @@
-import { chunk, getInput } from 'helpers/index'
-import { calculateAnswer, parseData, toEntries, turnIntoOneRace } from './utils'
+import { getInput } from 'helpers/index'
+import { calculateAnswer, toEntries, turnIntoOneRace } from './utils'
 
-const lines = getInput(import.meta.dir)
+const lines = getInput(import.meta.dir, 'example.txt')
 const entries = toEntries(lines)
 const part1Answer = calculateAnswer(entries)
 

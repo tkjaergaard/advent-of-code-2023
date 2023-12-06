@@ -16,6 +16,14 @@ export const toEntries = (lines: string[]) => {
   return data.map(parseData)[0]
 }
 
+const quadracticCalc = (t: number, d: number) => {
+  return (
+    Math.ceil((t + Math.sqrt(t ** 2 - 4 * d)) / 2) -
+    Math.floor((t - Math.sqrt(t ** 2 - 4 * d)) / 2) -
+    1
+  )
+}
+
 export const calculateAnswer = (entries: number[][]) => {
   let answer: number = 1
 
@@ -23,18 +31,22 @@ export const calculateAnswer = (entries: number[][]) => {
     const distance = entry[1]
     const time = entry[0]
 
-    let speeds: number = 0
+    // Updated mathematical solving
+    answer *= quadracticCalc(time, distance)
 
-    for (let speed = 1; speed <= time; speed++) {
-      let timeToTravel = time - speed
-      let potentialDistance = speed * timeToTravel
+    // Original implementation (Brute force)
+    //   let speeds: number = 0
 
-      if (potentialDistance > distance) {
-        speeds += 1
-      }
-    }
+    //   for (let speed = 1; speed <= time; speed++) {
+    //     let timeToTravel = time - speed
+    //     let potentialDistance = speed * timeToTravel
 
-    answer *= speeds
+    //     if (potentialDistance > distance) {
+    //       speeds += 1
+    //     }
+    //   }
+
+    //   answer *= speeds
   }
 
   return answer
