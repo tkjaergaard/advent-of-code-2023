@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'bun:test'
 import { getInput } from 'helpers/index'
-import { calculateTotalSum, ranks, ranksWithJoker } from './utils'
+import { calculateTotalSum } from './utils'
 
 const inputs = getInput(import.meta.dir)
 const exampleInput = getInput(import.meta.dir, 'example.txt')
