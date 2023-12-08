@@ -47,36 +47,21 @@ export const findGhostPathSteps = (
   )
 
   let directions = [..._directions]
-  let steps = 0
-
   let cycles: number[][] = []
 
   for (let node of startingNodes) {
-    let cycle: number[] = []
     let dirs = [...directions]
     let step_count = 0
-    let firstMatch = null
 
-    while (true) {
-      while (step_count === 0 || !node.endsWith(endingNodesTrailingLetter)) {
-        step_count++
-        node = paths[node][dirs[0]]
+    while (!node.endsWith(endingNodesTrailingLetter)) {
+      step_count++
+      node = paths[node][dirs[0]]
 
-        const prev: (1 | 0)[] = dirs.splice(0, 1)
-        dirs.push(prev[0])
-      }
-
-      cycle.push(step_count)
-
-      if (firstMatch === null) {
-        firstMatch = node
-        step_count = 0
-      } else if (firstMatch === node) {
-        break
-      }
+      const prev: (1 | 0)[] = dirs.splice(0, 1)
+      dirs.push(prev[0])
     }
 
-    cycles.push(cycle)
+    cycles.push([step_count])
   }
 
   return calculateCycles(cycles.map((cycle) => cycle[0]))
